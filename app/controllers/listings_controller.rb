@@ -55,6 +55,6 @@ class ListingsController < ApplicationController
 
     the_listing.destroy
 
-    redirect_to("/listings", { :notice => "Listing deleted successfully." } )
+    redirect_to("/boards/#{the_listing.board_id}", { :notice => "Listing deleted successfully." } )
   end
 end
