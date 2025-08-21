@@ -1,0 +1,111 @@
+<h1>
+  Listing #<%= @the_listing.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/listings">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_listing/<%= @the_listing.id %>">
+      Delete listing
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Title
+    </dt>
+    <dd>
+      <%= @the_listing.title %>
+    </dd>
+
+    <dt>
+      Body
+    </dt>
+    <dd>
+      <%= @the_listing.body %>
+    </dd>
+
+    <dt>
+      Expires on
+    </dt>
+    <dd>
+      <%= @the_listing.expires_on %>
+    </dd>
+
+    <dt>
+      Board
+    </dt>
+    <dd>
+      <%= @the_listing.board_id %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_listing.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_listing.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit listing
+    </h2>
+  </header>
+
+  <form action="/modify_listing/<%= @the_listing.id %>"  method="post" >
+    <div>
+      <label for="title_box">
+        Title
+      </label>
+
+      <input type="text" id="title_box" name="query_title" value="<%= @the_listing.title %>">
+    </div>
+
+    <div>
+      <label for="body_box">
+        Body
+      </label>
+
+      <input type="text" id="body_box" name="query_body" value="<%= @the_listing.body %>">
+    </div>
+
+    <div>
+      <label for="expires_on_box">
+        Expires on
+      </label>
+
+      <input type="date" id="expires_on_box" name="query_expires_on" value="<%= @the_listing.expires_on %>">
+    </div>
+
+    <div>
+      <label for="board_id_box">
+        Board
+      </label>
+
+      <input type="text" id="board_id_box" name="query_board_id" value="<%= @the_listing.board_id %>">
+    </div>
+
+    <button type="submit">
+      Update listing
+    </button>
+  </form>
+</article>
+
+<hr>

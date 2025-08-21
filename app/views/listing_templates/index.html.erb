@@ -1,0 +1,67 @@
+<h1>
+  List of all listings
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new listing
+    </h2>
+  </header>
+
+  <form action="/insert_listing" method="post">
+    <div>
+      <label for="title_box">
+        Title
+      </label>
+
+      <input type="text" id="title_box" name="query_title">
+    </div>
+
+    <div>
+      <label for="body_box">
+        Body
+      </label>
+
+      <input type="text" id="body_box" name="query_body">
+    </div>
+
+    <div>
+      <label for="expires_on_box">
+        Expires on
+      </label>
+
+      <input type="date" id="expires_on_box" name="query_expires_on">
+    </div>
+
+    <div>
+      <label for="board_id_box">
+        Board
+      </label>
+
+      <input type="text" id="board_id_box" name="query_board_id">
+    </div>
+
+    <button type="submit">
+      Create listing
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_listings.each do |a_listing| %>
+      <li>
+        <a href="/listings/<%= a_listing.id %>">
+          Listing #<%= a_listing.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>
