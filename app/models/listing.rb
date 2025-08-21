@@ -13,6 +13,7 @@
 #
 class Listing < ApplicationRecord
   belongs_to :board, class_name: "Board", foreign_key: "board_id"
+  belongs_to :user, class_name: "User", foreign_key: "user_id"
 
   validates :title, presence: true
   validates :body, presence: true

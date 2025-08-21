@@ -19,6 +19,7 @@
         <th>Title</th>
         <th>Body</th>
         <th>Expires on</th>
+        <th>Listed by</th>
         <th>Posted on</th>
       </thead>
 
@@ -37,6 +38,10 @@
 
             <td>
               <%= a_listing.expires_on.strftime("%b %e, %Y") %>
+            </td>
+
+            <td>
+              <%= a_listing.user.email %>
             </td>
 
             <td>

@@ -4,6 +4,7 @@ task({ sample_data: :environment }) do
 
   Board.delete_all
   Listing.delete_all
+  User.delete_all
 
   if Rails.env.production?
     ActiveRecord::Base.connection.tables.each do |t|
@@ -13,6 +14,18 @@ task({ sample_data: :environment }) do
         # Skip tables that don't have an id sequence
       end
     end
+  end
+
+  usernames = [ "alice", "bob", "carol", "dave", "eve" ]
+  users = []
+  usernames.each do |username|
+    user = User.new
+    user.username = username
+    user.email = "#{username}@example.com"
+    user.password = "appdev"
+    user.save
+
+    users.push(user)
   end
 
   # Campus building/dorm names
@@ -200,6 +213,7 @@ task({ sample_data: :environment }) do
   campus_locations.sample(5).each do |location|
     board = Board.new
     board.name = location
+    board.user_id = users.sample.id
     board.save
 
     # Initialize tracking for this board
@@ -224,6 +238,7 @@ task({ sample_data: :environment }) do
 
       listing = Listing.new
       listing.board_id = board.id
+      listing.user_id = users.sample.id
       listing.title = template[:titles][title_index]
       listing.body = template[:bodies][title_index]
 
@@ -257,6 +272,7 @@ task({ sample_data: :environment }) do
     end
   end
 
+  puts "There are now #{User.count} rows in the users table."
   puts "There are now #{Board.count} rows in the boards table."
   puts "There are now #{Listing.count} rows in the listings table."
 end
