@@ -24,7 +24,7 @@
       </thead>
 
       <% active_listings = @the_board.listings.where({ :expires_on => (Date.today...) }) %>
-      
+
       <tbody>
         <% active_listings.each do |a_listing| %>
           <tr>
@@ -43,9 +43,12 @@
             <td>
               <%= a_listing.user.email %>
 
-              <a href="/delete_listing/<%= a_listing.id %>">
-                Delete
-              </a>
+              <% if a_listing.user_id == current_user.id %>
+                <a href="/delete_listing/<%= a_listing.id %>">
+                  Delete
+                </a>
+              <% end %>
+
             </td>
 
             <td>
@@ -60,7 +63,7 @@
 
 <article>
   <header>
-      Add a new listing
+    Add a new listing
   </header>
 
   <form action="/insert_listing" method="post">
@@ -111,7 +114,7 @@
       </thead>
 
       <% expired_listings = @the_board.listings.where({ :expires_on => (...Date.today) }) %>
-      
+
       <tbody>
         <% expired_listings.each do |a_listing| %>
           <tr>
